@@ -10,7 +10,7 @@ class PickImage extends StatefulWidget {
 class PickImageState extends State<PickImage> {
   File imageFile;
 
-  var ImageFiles = [];
+  var imageFiles = [];
   _openGallary(BuildContext context) async {
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
     this.setState(() {
@@ -23,9 +23,9 @@ class PickImageState extends State<PickImage> {
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
     this.setState(() {
       imageFile = picture;
-      this.ImageFiles.add(picture);
+      this.imageFiles.add(picture);
       print("This is link img");
-      print(ImageFiles[0]);
+      print(imageFiles[0]);
     });
     Navigator.of(context).pop();
   }
@@ -99,10 +99,10 @@ class PickImageState extends State<PickImage> {
       child: Row(
         children: [
           Row(
-              children: ImageFiles.map(
+              children: imageFiles.map(
             (url) => new InkWell(
               onTap: () {
-                var index = ImageFiles.indexOf(url);
+                var index = imageFiles.indexOf(url);
                 _settingModalBottomSheet(context, index);
               },
               child: Image.file(url, height: 90, width: 90),
@@ -113,8 +113,8 @@ class PickImageState extends State<PickImage> {
               InkWell(
                 child: Image.asset('assets/plus.png', height: 90, width: 90),
                 onTap: () {
-                  if (ImageFiles.length > 2) {
-                    print(ImageFiles);
+                  if (imageFiles.length > 2) {
+                    print(imageFiles);
                   } else {
                     _showChoiceDialog(context);
                   }
@@ -158,7 +158,7 @@ class PickImageState extends State<PickImage> {
                     ),
                     onTap: () {
                       setState(() {
-                        ImageFiles.removeAt(index);
+                        imageFiles.removeAt(index);
                         Navigator.of(context).pop();
                       });
                     }),
