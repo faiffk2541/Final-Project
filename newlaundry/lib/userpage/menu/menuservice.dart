@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newlaundry/userpage/menuservice/detailservice.dart';
 
 class MenuServicePage extends StatefulWidget {
   @override
@@ -30,7 +31,7 @@ class MenuServiceState extends State<MenuServicePage> {
           Container(
             alignment: Alignment.topCenter,
             child: Text(
-              'เลือกบริการ',
+              'บริการของร้าน',
               style: TextStyle(
                   color: Colors.redAccent,
                   fontFamily: 'Prompt',
@@ -51,6 +52,36 @@ class MenuServiceState extends State<MenuServicePage> {
                       borderRadius: BorderRadius.circular(50)),
                   child: Text(
                     'ซักอบรีด',
+                    style: TextStyle(
+                        color: Colors.redAccent,
+                        fontFamily: 'Prompt',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 18),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailServicePage()),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 50),
+          Container(
+            child: Center(
+              child: Container(
+                width: 200,
+                height: 50,
+                child: RaisedButton(
+                  elevation: 0,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Text(
+                    'ซักพับ',
                     style: TextStyle(
                         color: Colors.redAccent,
                         fontFamily: 'Prompt',

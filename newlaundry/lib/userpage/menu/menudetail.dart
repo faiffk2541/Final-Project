@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
-//import 'package:newlaundry/userpage/menu/menuservice.dart';
+import 'package:newlaundry/userpage/menu/menuservice.dart';
 
 class MenuDetailPage extends StatefulWidget {
   @override
@@ -30,12 +30,12 @@ class MenuDetailState extends State<MenuDetailPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 15, right: 10, left: 10),
+            margin: EdgeInsets.only(top: 15, right: 10, left: 10, bottom: 25),
             child: Center(
               child: Container(
                 height: 250,
                 width: 350,
-                // color: Colors.white,
+                //color: Colors.white,
                 child: Center(
                   child: Image.asset('assets/shop1.png'),
                 ),
@@ -43,8 +43,8 @@ class MenuDetailState extends State<MenuDetailPage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            height: MediaQuery.of(context).size.height - 350,
+            padding: EdgeInsets.symmetric(vertical: 35, horizontal: 20),
+            height: MediaQuery.of(context).size.height - 375,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -60,45 +60,55 @@ class MenuDetailState extends State<MenuDetailPage> {
                     shopName(name: "ร้านซักรีด"),
                   ],
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
+                Row(
+                  children: [
+                    showtime(name: "time"),
+                  ],
+                ),
+                SizedBox(height: 15),
                 Row(
                   children: [
                     shopDetail(name: "ที่อยู่ร้าน"),
                   ],
-                )
+                ),
+                SizedBox(height: 150),
+                Column(
+                  children: [
+                    Container(
+                      child: Center(
+                        child: Container(
+                          width: 200,
+                          height: 50,
+                          child: RaisedButton(
+                            elevation: 0,
+                            color: Colors.redAccent[100],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            child: Text(
+                              'บริการของร้าน',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Prompt',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MenuServicePage()),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-
-          // Container(
-          //   child: Center(
-          //     child: Container(
-          //       width: 200,
-          //       height: 50,
-          //       child: RaisedButton(
-          //         elevation: 0,
-          //         color: Colors.white,
-          //         shape: RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.circular(50)),
-          //         child: Text(
-          //           'เลือกบริการ',
-          //           style: TextStyle(
-          //               color: Colors.redAccent,
-          //               fontFamily: 'Prompt',
-          //               fontWeight: FontWeight.w300,
-          //               fontSize: 18),
-          //         ),
-          //         onPressed: () {
-          //           Navigator.push(
-          //             context,
-          //             MaterialPageRoute(
-          //                 builder: (context) => MenuServicePage()),
-          //           );
-          //         },
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -123,25 +133,6 @@ Row shopLocation({String name}) {
             fontWeight: FontWeight.w300),
       )
     ],
-  );
-}
-
-Expanded shopDetail({String name}) {
-  return Expanded(
-    child: Row(
-      children: [
-        Icon(Icons.home),
-        SizedBox(height: 10, width: 10),
-        Text(
-          '104 ซอย ประชาอุทิศ 45 ถนนประชาอุทิศ แขวงบางมด เขตทุ่งครุ กรุงเทพมหานคร 10140',
-          style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Prompt',
-              fontSize: 16,
-              fontWeight: FontWeight.w300),
-        ),
-      ],
-    ),
   );
 }
 
@@ -182,3 +173,80 @@ Expanded shopName({String name}) {
     ),
   );
 }
+
+Expanded showtime({String name}) {
+  return Expanded(
+    child: Row(
+      children: [
+        Icon(Icons.access_time),
+        SizedBox(height: 10, width: 10),
+        Flexible(
+          child: Text(
+            '8:00 - 18:00 น.',
+            overflow: TextOverflow.visible,
+            style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Prompt',
+                fontSize: 16,
+                fontWeight: FontWeight.w300),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Expanded shopDetail({String name}) {
+  return Expanded(
+    child: Row(
+      children: [
+        Icon(Icons.home),
+        SizedBox(height: 10, width: 10),
+        Flexible(
+          child: Text(
+            '104 ซอย ประชาอุทิศ 45 ถนนประชาอุทิศ แขวงบางมด เขตทุ่งครุ กรุงเทพมหานคร 10140',
+            overflow: TextOverflow.visible,
+            style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Prompt',
+                fontSize: 16,
+                fontWeight: FontWeight.w300),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+// Expanded selectbutton({String name}) {
+//   return Expanded(
+//     child: Container(
+//       child: Center(
+//         child: Container(
+//           width: 200,
+//           height: 50,
+//           child: RaisedButton(
+//             elevation: 0,
+//             color: Colors.redAccent[100],
+//             shape:
+//                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+//             child: Text(
+//               'เลือกบริการ',
+//               style: TextStyle(
+//                   color: Colors.white,
+//                   fontFamily: 'Prompt',
+//                   fontWeight: FontWeight.w300,
+//                   fontSize: 18),
+//             ),
+//             onPressed: () {
+//               Navigator.push(
+//                 context,
+//                 MaterialPageRoute(builder: (context) => MenuServicePage()),
+//               );
+//             },
+//           ),
+//         ),
+//       ),
+//     ),
+//   );
+// }

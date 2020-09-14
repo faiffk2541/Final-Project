@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:newlaundry/widgets/pickimage.dart';
+// import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 
 class InformationLaundry extends StatefulWidget {
   @override
@@ -37,7 +39,47 @@ class InformationLaundryState extends State<InformationLaundry> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-          )
+          ),
+          SizedBox(height: 30, width: 30),
+          Container(
+            child: PickImage(),
+          ),
+          SizedBox(height: 30, width: 30),
+          Container(
+            padding: EdgeInsets.only(left: 30, right: 30),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'ชื่อร้าน',
+                labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Prompt',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
+                prefixIcon: Icon(
+                  Icons.shopping_basket,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            padding: EdgeInsets.only(left: 30, right: 30),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'ชื่อร้าน',
+                labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Prompt',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
+                prefixIcon: Icon(
+                  Icons.shopping_basket,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
