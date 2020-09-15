@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
           },
           height: 60,
           items: <Widget>[
-            Icon(Icons.home, size: 30, color: Colors.white),
+            Icon(Icons.access_time, size: 30, color: Colors.white),
             Icon(Icons.history, size: 30, color: Colors.white),
             Icon(Icons.notifications_active, size: 30, color: Colors.white),
             Icon(Icons.perm_identity, size: 30, color: Colors.white),
