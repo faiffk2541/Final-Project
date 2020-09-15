@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-//import 'package:newlaundry/signinpage/signinpage.dart';
+//import 'package:newlaundry/signinpage/signinpage.dart'; //
 import 'userpage/historypage.dart';
 import 'userpage/homepage.dart';
 import 'userpage/notificationpage.dart';
 import 'userpage/profilepage.dart';
-
 
 void main() => runApp(MyApp());
 
