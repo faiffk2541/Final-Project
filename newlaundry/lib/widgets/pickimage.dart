@@ -24,8 +24,6 @@ class PickImageState extends State<PickImage> {
     this.setState(() {
       imageFile = picture;
       this.imageFiles.add(picture);
-      print("This is link img");
-      print(imageFiles[0]);
     });
     Navigator.of(context).pop();
   }
@@ -105,13 +103,13 @@ class PickImageState extends State<PickImage> {
                 var index = imageFiles.indexOf(url);
                 _settingModalBottomSheet(context, index);
               },
-              child: Image.file(url, height: 90, width: 90),
+              child: Image.file(url, height: 100, width: 100),
             ),
           ).toList()),
           Column(
             children: [
               InkWell(
-                child: Image.asset('assets/plus.png', height: 90, width: 90),
+                child: Image.asset('assets/frame.png', height: 90, width: 90),
                 onTap: () {
                   if (imageFiles.length > 2) {
                     print(imageFiles);
