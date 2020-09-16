@@ -37,7 +37,64 @@ class ServiceLaundryState extends State<ServiceLaundry> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-          )
+          ),
+          SizedBox(height: 100),
+          Container(
+            padding: EdgeInsets.only(left: 30, right: 30),
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      width: 120,
+                      height: 50,
+                      child: RaisedButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(10),
+                        color: Colors.redAccent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Text(
+                          'แก้ไข',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Prompt',
+                              fontSize: 18,
+                              fontWeight: FontWeight.w300),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(width: 30),
+                Column(
+                  children: [
+                    Container(
+                      width: 120,
+                      height: 50,
+                      child: RaisedButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(10),
+                        color: Colors.redAccent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Text(
+                          'บันทึก',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Prompt',
+                              fontSize: 18,
+                              fontWeight: FontWeight.w300),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );

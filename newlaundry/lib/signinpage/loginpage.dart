@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newlaundry/navigationbar.dart';
 import 'package:newlaundry/widgets/google_login.dart';
 
 class LoginPage extends StatefulWidget {
@@ -114,7 +115,12 @@ class LoginPageState extends State<LoginPage> {
             child: Container(
               width: 250,
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NavigationBarPage()),
+                  );
+                },
                 padding: EdgeInsets.all(10),
                 color: Colors.redAccent,
                 elevation: 5,

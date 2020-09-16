@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newlaundry/laundrypage/profilelaundry.dart';
+import 'package:newlaundry/signinpage/signinpage.dart';
 import 'package:newlaundry/userpage/profileuser/accountpage.dart';
 import 'package:newlaundry/userpage/profileuser/addresspage.dart';
 
@@ -150,7 +151,12 @@ class ProfilePageState extends State<ProfilePage> {
             margin: EdgeInsets.only(left: 100, right: 100),
             width: double.maxFinite,
             child: InkWell(
-              onTap: () => {},
+              onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignInPage()),
+                )
+              },
               child: Card(
                 child: Container(
                   height: 60,
