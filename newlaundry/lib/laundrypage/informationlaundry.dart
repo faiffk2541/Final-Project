@@ -232,6 +232,7 @@ class InformationLaundryState extends State<InformationLaundry> {
           Container(
             padding: EdgeInsets.only(left: 30, right: 30),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
                   children: [
