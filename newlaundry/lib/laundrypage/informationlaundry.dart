@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:newlaundry/widgets/pickimage.dart';
+import 'dart:io';
+import 'dart:math';
+import 'dart:async';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+//import 'package:firebase_core/firebase_core.dart';
+
 // import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 
 class InformationLaundry extends StatefulWidget {
@@ -8,6 +15,76 @@ class InformationLaundry extends StatefulWidget {
 }
 
 class InformationLaundryState extends State<InformationLaundry> {
+  File imageFile, file;
+  String urlPic;
+  var imageFiles = [];
+  _openGallary(BuildContext context) async {
+    var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
+    this.setState(() {
+      imageFile = picture;
+    });
+    Navigator.of(context).pop();
+  }
+
+  _openCamera(ImageSource imageSource) async {
+    var picture = await ImagePicker.pickImage(source: imageSource);
+    setState(() {
+      imageFile = picture;
+      this.imageFiles.add(picture);
+    });
+    Navigator.of(context).pop();
+  }
+
+  Future<void> _showChoiceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              'ดำเนินการ',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Prompt',
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700),
+            ),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  GestureDetector(
+                    child: Text(
+                      'รูปภาพ',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Prompt',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300),
+                    ),
+                    onTap: () {
+                      _openGallary(context);
+                    },
+                  ),
+                  Padding(padding: EdgeInsets.all(8)),
+                  GestureDetector(
+                    child: Text(
+                      'กล้องถ่ายรูป',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Prompt',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300),
+                    ),
+                    onTap: () {
+                      _openCamera(ImageSource.camera);
+                    },
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +119,43 @@ class InformationLaundryState extends State<InformationLaundry> {
           ),
           SizedBox(height: 30, width: 30),
           Container(
-            child: PickImage(),
-          ),
+            // child: PickImage(),
+// this part PickImage
+            padding: EdgeInsets.only(left: 30),
+            alignment: Alignment.topLeft,
+            child: Row(
+              children: [
+                Row(
+                    children: imageFiles
+                        .map(
+                          (url) => new InkWell(
+                            onTap: () {
+                              var index = imageFiles.indexOf(url);
+                              _settingModalBottomSheet(context, index);
+                            },
+                            child: Image.file(url, height: 100, width: 100),
+                          ),
+                        )
+                        .toList()),
+                Column(
+                  children: [
+                    InkWell(
+                      child: Image.asset('assets/frame.png',
+                          height: 90, width: 90),
+                      onTap: () {
+                        if (imageFiles.length > 2) {
+                          print(imageFiles);
+                        } else {
+                          _showChoiceDialog(context);
+                        }
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ), // finish PickImage part
+// this part input infor store
           SizedBox(height: 30, width: 30),
           Container(
             padding: EdgeInsets.only(left: 30, right: 30),
@@ -152,7 +264,12 @@ class InformationLaundryState extends State<InformationLaundry> {
                       width: 120,
                       height: 50,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print('!!!! object is done !!!!');
+                          uploadPicToStorage();
+                          //picimage.currentState.uploadPicToStorage();
+                          //uploae();
+                        },
                         padding: EdgeInsets.all(10),
                         color: Colors.redAccent,
                         elevation: 0,
@@ -177,4 +294,59 @@ class InformationLaundryState extends State<InformationLaundry> {
       ),
     );
   }
+
+  void _settingModalBottomSheet(context, index) {
+    print(index);
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            child: new Wrap(
+              children: <Widget>[
+                new ListTile(
+                    leading: new Icon(Icons.remove_red_eye),
+                    title: new Text(
+                      'ดู',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Prompt',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300),
+                    ),
+                    onTap: () => {}),
+                new ListTile(
+                    leading: new Icon(Icons.remove_circle),
+                    title: new Text(
+                      'ลบ',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Prompt',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        imageFiles.removeAt(index);
+                        Navigator.of(context).pop();
+                      });
+                    }),
+              ],
+            ),
+          );
+        });
+  }
+
+  Future<void> uploadPicToStorage() async {
+    Random random = Random();
+    int i = random.nextInt(100000);
+
+    FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+    StorageReference storageReference =
+        firebaseStorage.ref().child('PicInformationelaundry/inforlaunry$i.jpg');
+    StorageUploadTask storageUploadTask = storageReference.putFile(imageFile);
+
+    urlPic = await (await storageUploadTask.onComplete).ref.getDownloadURL();
+    print('urlPic is = $urlPic');
+  }
 }
+//}
