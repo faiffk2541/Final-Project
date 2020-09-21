@@ -12,14 +12,17 @@ class PickImageState extends State<PickImage> {
 
   var imageFiles = [];
   _openGallary(BuildContext context) async {
+    // ignore: deprecated_member_use
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
     this.setState(() {
       imageFile = picture;
+      this.imageFiles.add(picture);
     });
     Navigator.of(context).pop();
   }
 
   _openCamera(BuildContext context) async {
+    // ignore: deprecated_member_use
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
     this.setState(() {
       imageFile = picture;

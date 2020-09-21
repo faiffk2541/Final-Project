@@ -11,6 +11,7 @@ class NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       backgroundColor: Colors.deepOrange[100],
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Center(
           child: Padding(
             padding: EdgeInsets.only(top: 20),
@@ -27,6 +28,7 @@ class NotificationPageState extends State<NotificationPage> {
         backgroundColor: Colors.deepOrange[100],
         elevation: 0,
       ),
+      body: SingleChildScrollView(),
     );
   }
 }
