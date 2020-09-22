@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newlaundry/widgets/pickimage.dart';
+//import 'package:newlaundry/widgets/pickimage.dart';
 import 'dart:io';
 import 'dart:math';
 import 'dart:async';
