@@ -3,6 +3,7 @@ import 'package:newlaundry/widgets/pickimage.dart';
 import 'dart:io';
 import 'dart:math';
 import 'dart:async';
+import 'package:path/path.dart' as Path;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -329,6 +330,7 @@ class InformationLaundryState extends State<InformationLaundry> {
                       setState(() {
                         imageFiles.removeAt(index);
                         Navigator.of(context).pop();
+                        deleteImage(urlPic);
                       });
                     }),
               ],
@@ -348,6 +350,16 @@ class InformationLaundryState extends State<InformationLaundry> {
 
     urlPic = await (await storageUploadTask.onComplete).ref.getDownloadURL();
     print('urlPic is = $urlPic');
+  }
+
+  Future<void> deleteImage(String urlPic) async {
+    var fileUrl = Uri.decodeFull(Path.basename(urlPic))
+        .replaceAll(new RegExp(r'(\?alt).*'), '');
+
+    final StorageReference firebaseStorageRef =
+        FirebaseStorage.instance.ref().child(fileUrl);
+    await firebaseStorageRef.delete();
+    print('Successfully deleted $urlPic from storage');
   }
 }
 //}
