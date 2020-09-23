@@ -196,6 +196,7 @@ class InformationLaundryState extends State<InformationLaundry> {
                 TextField(
                   onChanged: (String string) {
                     adress = string.trim();
+                    print('insert adress done');
                   },
                   maxLines: null,
                   decoration: InputDecoration(
@@ -223,6 +224,7 @@ class InformationLaundryState extends State<InformationLaundry> {
                 TextField(
                   onChanged: (String string) {
                     phone = string.trim();
+                    print('insert phone done');
                   },
                   maxLines: null,
                   decoration: InputDecoration(
